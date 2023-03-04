@@ -18,4 +18,4 @@
 |
 */
 
-import './routes/auth.ts'
+import './auth'
