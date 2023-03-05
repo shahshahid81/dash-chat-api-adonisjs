@@ -20,7 +20,10 @@ const corsConfig: CorsConfig = {
   | you can define a function to enable/disable it on per request basis as well.
   |
   */
-  enabled: false,
+  enabled: (request): boolean => {
+    // TODO: add allowed cors origin in .env to make generic
+    return request.headers().origin === 'http://localhost:3000'
+  },
 
   // You can also use a function that return true or false.
   // enabled: (request) => request.url().startsWith('/api')
