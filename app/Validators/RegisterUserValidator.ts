@@ -14,7 +14,7 @@ export default class RegisterUserValidator {
     password: schema.string({ trim: true }, [
       rules.minLength(8),
       rules.maxLength(20),
-      rules.confirmed(),
+      rules.confirmed('confirmPassword'),
     ]),
     firstName: schema.string({ trim: true }, [
       rules.alpha(),
