@@ -6,7 +6,8 @@ export default class RegisterUserValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public refs = schema.refs({
-    allowedDate: DateTime.now().minus({ years: 18 }),
+    minimumAllowedDate: DateTime.now().minus({ years: 18 }),
+    maximumAllowedDate: DateTime.now().minus({ years: 120 }),
   })
 
   public schema = schema.create({
@@ -26,6 +27,9 @@ export default class RegisterUserValidator {
       rules.minLength(3),
       rules.maxLength(20),
     ]),
-    dateOfBirth: schema.date({ format: 'yyyy-MM-dd' }, [rules.before(this.refs.allowedDate)]),
+    dateOfBirth: schema.date({ format: 'yyyy-MM-dd' }, [
+      rules.before(this.refs.minimumAllowedDate),
+      rules.after(this.refs.maximumAllowedDate),
+    ]),
   })
 }
